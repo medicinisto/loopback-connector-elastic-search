@@ -9,5 +9,13 @@
 # https://github.com/mobz/elasticsearch-head/#running-as-a-plugin-of-elasticsearch
 plugin install mobz/elasticsearch-head
 
+
+# access it at /_plugin/elasticsearch-inquisitor/
+plugin install polyfractal/elasticsearch-inquisitor
+
 #exec /docker-entrypoint.sh elasticsearch
-exec elasticsearch -Des.insecure.allow.root=true
+exec elasticsearch -Des.insecure.allow.root=true \
+  --script.inline=true  \
+  --script.indexed=true \
+  --script.engine.groovy.inline.search=on \
+  --script.engine.groovy.inline.update=on
